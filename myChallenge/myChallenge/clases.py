@@ -9,7 +9,7 @@ from funciones import *
 class Jugador:
     """
     
-    
+    holAL A
     """
     dim_tablero = dim_tablero
     num_barcos = num_barcos
