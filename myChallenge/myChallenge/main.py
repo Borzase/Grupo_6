@@ -1,12 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-variables usadas en "main.py"
-last modification: Mar 16 2025
-@author: lupe, borja, edit, sara
-"""
 
-from clases import Jugador
 
+from clases import *
 
 
 #Después de eso ya comienza el juego. 
@@ -14,33 +8,79 @@ from clases import Jugador
 # y le irá preguntando coordenadas al usuario.
 
 ##MEnsaje de bienvenida
-print("=============Bienvenid@======================")
-vidas = 1
+print("Bienvenido a Hundir la flota grumete")
 
-while (vidas !=0):
-    
-    # Menu para iniciar (llamar a las funciones)
-    
-    # Opcion 1: id = input("Como te llamas?")
-    # Opcion 2: Ver instrucciones del juego
-    # Opcion 3: Jugar--->inicializar tableros
-    # Opcion 5: Dejar de jugar 
-    print("===Menu====")
 
-    ##Use a switch()
+def intrucciones():
+    print("""Intrucciones de Juego:
+          - Hay dos jugadores, usted y la máquina
+          - Sobre un tablero debe colocar la posicion de sus barcos
+          - Cuenta con: 4 barcos de 1 posición de eslora
+                        3 barcos de 2 posiciones de eslora
+                        2 barcos de 3 posiciones de eslora
+                        1 barco de 4 posiciones de eslora
+          - Cada posición del barco cuenta como una vida
+          - Tiene 10 posiciones en total, por lo que empieza con 10 vidas
+          - Para disparar tiene que introducir unas coordenas
+          - Si en las coordenas hay barco, le resta una vida a su oponente y sigue disparando
+          - Si en las coordenas hay agua, no resta vidas y pierde su turno
+          - Gana quien hunde todos los barcos del contrario
+          - Pierde el que se ha quedado sin vidas""")
+    return
     
-    #1.inicializar tableros
-    #2. maquina debe ingresar barcos aleatoriamente
-    #3.jugador debe ingresar las coordenadas
 
-    #Ejemplo de uso de clase Jugador
-    id = "Juanito"
-    jugador1 = Jugador(id)
-    print(jugador1.dim_tablero)
-    print(jugador1.tablero_v)
+def id_jugador():
+    nombre = input("Introduzca su nombre")
+    print(f"{nombre}, ¿Estás listo para jugar?")
+    Jugador(nombre)
+    return Jugador(nombre)
 
-    vidas -=1
     
+
+def jugar():
+    jugador1 = Jugador(id_jugador())
+    vidas_jugador1 = 10         #quizas haya que hacer alguna funcion para esto
+    vidas_maquina = 10
+    Jugador.posicionar_barcos(jugador1)
+        # solicitar coordenadas
+    Jugador.dim_tablero   # imprmir los tableros del jugador
+    # Ejecutar posicionamiento barcos_maquina de manera aleatorio
+        #imprimir barcos_maquina para chequear que ha funcionadp
+    #Empezar a jugar con un bucle while donde:
+    #mientras las vidas del jugador o de la maquina no lleguen a "0" seguimos jugando
+                    #cuando while = 0 del jugador o de la maquina se rompe el bucle y salimos del juego
+        # llamar a función disparar jugador
+            #........
+        # llamar a funcion disparar de la maquina
+            #.........
+        # cada "x" disparos ofrecer posibilidad de visualizar marcador o de salir del juego
+    
+    
+
+def salir():
+    pass 
+
+def switch(opcion):
+    diccionario = {
+        1 : "instrucciones()",
+        2 : "id_jugador()",
+        3 : "jugar()",
+        4 : "salir()"
+    }
+    if opcion > 4:
+        return
+    return eval (diccionario.get(opcion))
+while(True):
+    print("""Seleccione una opción:
+    1 - Instrucciones de juego
+    2 - Introduzca su nombre de jugador
+    3 - Comenzar a jugar
+    4 - Salir del juego""")
+
+    opcion = int(input())
+    continuar = switch(opcion)
+    if opcion > 4:
+        print("Algo ha ido mal, intentalo de nuevo")
     
 
 
