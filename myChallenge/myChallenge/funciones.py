@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 """
 Funciones para main.py
-@author: lupev
+@author: lupe, borja, edit, sara
 """
-# Posicion barco 
+import numpy as np
+
+#crea un tablero vacio
+def crea_tablero(lado):
+    tablero = np.full((lado, lado), " ")
+    return tablero
+
+# Posicion barco de forma aleatoria
 def pos_barcos_aleatorio():
     pass
 
@@ -20,11 +27,16 @@ def pos_barcos_aleatorio():
 #                 tablero[fil:fil+1,col:col+4] = "O"
     
 
+#posicionar barcos de forma manual 
 def pos_manual(coordenadas):
     pass
 
 #poner barcos en el tablero 
 def poner_barcos():
+    pass
+
+#Funcion para poner nombre de barco y eslora
+def guardar_barco():
     pass
 
 #comprobar barco exite

@@ -1,14 +1,14 @@
 """
 Clases usadas en "main.py"
 last modification: Mar 15 2025
-@authors:LV
+@author: lupe, borja, edit, sara
 """
 from variables import dim_tablero, num_barcos
 from funciones import *
 
 class Jugador:
     """
-    
+    Clase que guarda la id_jugador, 2 tableros (tablero_vacio, tablero_juego)
     
     """
     dim_tablero = dim_tablero
@@ -23,7 +23,7 @@ class Jugador:
     #tablero_juego: array de numpy con sus barcos 
     #array con los disparos efectuados, para saber dónde 
     #tenemos que disparar.
-    def __init__(self, id_jugador, barcos,tablero_vacio, tablero_juego ):
+    def __init__(self, id_jugador, barcos =guardar_barco,tablero_vacio = np.full((dim_tablero,dim_tablero)," "), tablero_juego =pos_barcos_aleatorio):
         self.id = id_jugador
         self.tablero_v = tablero_vacio
         self.tablero_j = tablero_juego
@@ -46,4 +46,9 @@ class Jugador:
         self.coordenada = coordenada
         #comprobar_barco_existe()
         #poner_marca()
-        
+    
+
+    #mostrar el tablero vacio
+    def mostrar_tablero(self):
+        print(self.id)
+        print(self.tablero_j)
