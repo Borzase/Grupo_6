@@ -1,6 +1,6 @@
 
 
-from clases import *
+from clases import Jugador
 
 
 #Después de eso ya comienza el juego. 
@@ -41,8 +41,11 @@ def jugar():
     jugador1 = Jugador(id_jugador())
     vidas_jugador1 = 10         #quizas haya que hacer alguna funcion para esto
     vidas_maquina = 10
-    Jugador.posicionar_barcos(jugador1)
-        # solicitar coordenadas
+    jugador1.barco4_1()
+    jugador1.barco3_2()
+    jugador1.barco2_3()
+    jugador1.barco1_4()
+       
     Jugador.dim_tablero   # imprmir los tableros del jugador
     # Ejecutar posicionamiento barcos_maquina de manera aleatorio
         #imprimir barcos_maquina para chequear que ha funcionadp

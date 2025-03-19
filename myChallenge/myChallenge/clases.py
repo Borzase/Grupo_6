@@ -7,23 +7,14 @@ from variables import dim_tablero, num_barcos
 from funciones import *
 
 class Jugador:
-    """
-    
-    
-    """
-    dim_tablero = dim_tablero
+
+    tablero_barcos_jugador = dim_tablero
+    tabler_vacio = dim_tablero
     num_barcos = num_barcos
     
     
-    #barcos:un diccionario donde nombre de tus
-    #tus barcos, y la eslora de cada uno.
-    #tablero_vacio:array de numpy donde posicionarás los barcos.
-    #Este tablero está vacío, por lo que lo puedes rellenar 
-    #de 0s, 1s, o el caracter que consideres.
-    #tablero_juego: array de numpy con sus barcos 
-    #array con los disparos efectuados, para saber dónde 
-    #tenemos que disparar.
-    def __init__(self, id_jugador, barcos,tablero_vacio, tablero_juego ):
+    
+    def __init__(self, id_jugador, tablero_vacio, tablero_juego):
         self.id = id_jugador
         self.tablero_v = tablero_vacio
         self.tablero_j = tablero_juego

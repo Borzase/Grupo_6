@@ -1,16 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-Funciones para main.py
-@author: lupe, borja, edit, sara
-"""
+
 import numpy as np
-
-#crea un tablero vacio
-def crea_tablero(lado):
-    tablero = np.full((lado, lado), " ")
-    return tablero
-
-# Posicion barco de forma aleatoria
+# Posicion barco 
 def pos_barcos_aleatorio():
     pass
 
@@ -25,18 +16,17 @@ def pos_barcos_aleatorio():
 #         if val != "O" and col+4 <len(tablero):
 #             if fil == pos_barco[0][0] and col == pos_barco[0][1]:
 #                 tablero[fil:fil+1,col:col+4] = "O"
-    
+tablero_jugador   
 
-#posicionar barcos de forma manual 
-def pos_manual(coordenadas):
-    pass
+def posicionar_barcos(tablero_jugador, coordenadas):
+    for x in coordenadas:
+        tablero_jugador[x] = "O"
+        print("Barco colocado correctamente")
+    return tablero
+
 
 #poner barcos en el tablero 
 def poner_barcos():
-    pass
-
-#Funcion para poner nombre de barco y eslora
-def guardar_barco():
     pass
 
 #comprobar barco exite
@@ -45,10 +35,18 @@ def comprobar_barco_existe(tablero, coordenada):
     pass
     return tablero
 
-def disparo(tablero, barco):
-    for pieza in barco:
-        tablero[pieza] = "X"
-    return tablero
+def disparos():
+    
+    x = int(input("Introducza su coordenada para el eje X"))
+    y = int(input("Introducza su coordenada para el eje Y"))
+    coor = (x, y)
+    if tablero[coor] == "O":
+        tablero[coor] = "X"
+        print("Buena punteria")
+    elif tablero[coor] != "O":
+        tablero[coor] = "-"
+        print("Has fallado")
+    return(tablero)
 
 
 def coloca_barco(tablero, barco):
