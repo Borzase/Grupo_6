@@ -61,13 +61,12 @@ def jugar():
     # Ejecutar posicionamiento barcos_maquina de manera aleatorio
     jugador.posicionar_barcos()
     jugador.imprimir_tablero()
-    jugador.reduccion_vidas()
     
     
     maquina = Jugador("maquina")
     maquina.posicionar_barcos()
     maquina.imprimir_tablero()
-    maquina.reduccion_vidas()
+    
     
 
     
@@ -84,8 +83,9 @@ def jugar():
         # llamar a funcion disparar de la maquina
         maquina.disparo_maquina(jugador.tablero_j)
         maquina.reduccion_vidas()
-        jugador.imprimir_tablero()
-        maquina.imprimir_tablero()
+        #jugador.imprimir_tablero()
+        #maquina.imprimir_tablero()
+        jugador.imprimir_tableros(maquina)
         
         # cada "x" disparos ofrecer posibilidad de visualizar
         #marcador o de salir del juego

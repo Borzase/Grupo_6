@@ -5,7 +5,8 @@ last modification: Mar 15 2025
 """
 import numpy as np
 from variables import vidas_j, eslora, orientacion
-from funciones import pos_barcos_aleatorio, disparo_coordenada, disparo_maq
+from funciones import pos_barcos_aleatorio, disparo_coordenada, disparo_maq, visualizar_tableros
+
 
 class Jugador:
 
@@ -49,3 +50,9 @@ class Jugador:
     def imprimir_tablero(self):
         print(f"--->Tablero {self.id}<----->{self.vidas} vidas")
         print(self.tablero_j)
+        
+    def imprimir_tableros(self, maquina):
+        self.maquina = maquina
+        print(f"->Tablero {self.id}<->{self.vidas} vidas<--------->Tablero {self.maquina.id}<->{self.maquina.vidas} vidas")
+        visualizar_tableros(self.tablero_j, self.maquina.tablero_j)
+

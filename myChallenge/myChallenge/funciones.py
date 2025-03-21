@@ -82,3 +82,9 @@ def coloca_barco(tablero, barco):
     return tablero
 
 
+def visualizar_tableros(tablero1, tablero2):
+
+    for vec1, vec2 in zip(tablero1, tablero2):
+        print("| "," ".join(vec1)," |          ","| "," ".join(vec2)," |")
+    
+
