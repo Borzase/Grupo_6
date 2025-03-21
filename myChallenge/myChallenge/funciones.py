@@ -1,56 +1,84 @@
-# -*- coding: utf-8 -*-
-
+"""
+Funciones usadas en "main.py"
+"""
 import numpy as np
-# Posicion barco 
-def pos_barcos_aleatorio():
-    pass
 
-# ejemplo posicionamiento aleatorio 
-# pos_barco =  np.array([[1, 7]])
-# while pos_barco[0][1]+4 >len(tablero):
-#     pos_barco =  np.random.randint( 0, 10, size= (1,2))
-# print(pos_barco)    
 
-# for fil, vec in enumerate(tablero):
-#     for col, val in enumerate(vec):
-#         if val != "O" and col+4 <len(tablero):
-#             if fil == pos_barco[0][0] and col == pos_barco[0][1]:
-#                 tablero[fil:fil+1,col:col+4] = "O"
-tablero_jugador   
+# Posicion barco aleatoriamente
+def pos_barco_aleatorio(tablero, esl, ori):
+    
+    pos_barco =  np.array([0, 0])
+    pos_eslora = np.array([esl, esl])
+    pos = pos_barco + pos_eslora
+    while pos[0] >len(tablero) or pos[1]+esl >len(tablero) or tablero[pos_barco[0]][pos_barco[1]] == "O":
+        pos_barco =  np.random.randint( 0, len(tablero), 2)
 
+
+    for fil, vec in enumerate(tablero):
+        for col, val in enumerate(vec):
+            if val != "O":
+                if fil == pos_barco[0] and col == pos_barco[1]: 
+                    if ori == "H":
+                        tablero[fil:fil+1,col:col+esl] = "O"
+                    else:
+                        tablero[fil:fil+esl,col:col+1] = "O"
+                        
+                    tablero_new = tablero
+    
+    return tablero_new
+
+# Posicionar barcos aleatoriamente
+def pos_barcos_aleatorio(eslora, orientacion):
+    tablero  = np.full((10,10), " ") 
+    for esl, barcos in eslora.items():
+        for barco in range(barcos):            
+            ori = orientacion[np.random.randint( 0, 2)] 
+            tablero_new = pos_barco_aleatorio(tablero, esl, ori)
+            tablero = tablero_new 
+    
+    return tablero
+
+    
+#poner barcos en el tablero pidiendole al jugador coordenadas
 def posicionar_barcos(tablero_jugador, coordenadas):
     for x in coordenadas:
         tablero_jugador[x] = "O"
         print("Barco colocado correctamente")
-    return tablero
+    return tablero_jugador
 
-
-#poner barcos en el tablero 
-def poner_barcos():
-    pass
 
 #comprobar barco exite
 #poner marca X(disparo), O (barco) o - (agua)
-def comprobar_barco_existe(tablero, coordenada): 
-    pass
+def disparo_coordenada(tablero):
+    
+    x = int(input("Introduzca coordenada para X:"))
+    y = int(input("Introduzca coordenada para Y:"))
+    coordenada = (x, y)
+    if tablero[coordenada] == "O":
+        tablero[coordenada] = "X"
+        print("Buena punteria")
+    elif tablero[coordenada] != "O":
+        tablero[coordenada]  = "-"
+        print("Has fallado")
+        
     return tablero
 
-def disparos():
-    
-    x = int(input("Introducza su coordenada para el eje X"))
-    y = int(input("Introducza su coordenada para el eje Y"))
-    coor = (x, y)
-    if tablero[coor] == "O":
-        tablero[coor] = "X"
-        print("Buena punteria")
-    elif tablero[coor] != "O":
-        tablero[coor] = "-"
-        print("Has fallado")
-    return(tablero)
+
+def disparo_maq(tablero):
+    x =  np.random.randint( 0, len(tablero), 1)
+    y =  np.random.randint( 0, len(tablero), 1)
+    coordenada = (x, y)
+    if tablero[coordenada] == "O":
+        tablero[coordenada] = "X"
+        print("Mala suerte! Le han dado")
+    elif tablero[coordenada] != "O":
+        tablero[coordenada]  = "-"        
+    return tablero
 
 
 def coloca_barco(tablero, barco):
     for pieza in barco:
         tablero[pieza] = "O"
     return tablero
+
 
