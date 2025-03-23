@@ -3,56 +3,38 @@ Clases usadas en "main.py"
 last modification: Mar 15 2025
 @authors:LV
 """
-import numpy as np
-from variables import vidas_j, eslora, orientacion
-from funciones import pos_barcos_aleatorio, disparo_coordenada, disparo_maq, visualizar_tableros
-
+from variables import dim_tablero, num_barcos
+from funciones import *
 
 class Jugador:
 
-    eslora  = eslora
-    orientacion = orientacion 
-    vidas = vidas_j
-    tablero_vacio  = np.full((10,10), " ") 
+    tablero_barcos_jugador = dim_tablero
+    tabler_vacio = dim_tablero
+    num_barcos = num_barcos
     
-    def __init__(self, id_jugador, tablero_v = tablero_vacio , tablero_j = tablero_vacio , vidas = vidas_j):
+    
+    
+    def __init__(self, id_jugador, tablero_vacio, tablero_juego):
         self.id = id_jugador
-        self.tablero_v = tablero_v
-        self.tablero_j = tablero_j
-        self.vidas = vidas
+        self.tablero_v = tablero_vacio
+        self.tablero_j = tablero_juego
+        self.barcos = barcos
         
     #introducir barcos en el tablero 
-    def posicionar_barcos(self):
-        #pos barcos aleatorios
-        self.tablero_j= pos_barcos_aleatorio(self.eslora, self.orientacion)
+    def posicionar_barcos(self, id_jugador):
+        ###### poner aqui las funciones
+        #pos_barcos_aleatorio()
         #pos_manual()
         #poner_barcos()
         #imprimir_tableros()
-        return self. tablero_j
-
+        pass
     
     #jugador en ese tablero, tendrás que comprobar si ahi
     #había un barco, o simplemente agua. 
     #Acuérdate de marcar en el tablero, tanto si hay un impacto,
     #como si dio agua.
-    def disparo(self, tablero_maquina): 
-        self.tablero_maquina = tablero_maquina
-        return disparo_coordenada(self.tablero_maquina)
-    
-    def disparo_maquina(self, tablero_jugador):
-        self.tablero_jugador = tablero_jugador
-        return disparo_maq(self.tablero_jugador)
-    
-    def reduccion_vidas(self):
-        self.vidas = self.vidas - 1
-        return self.vidas
-    
-    def imprimir_tablero(self):
-        print(f"--->Tablero {self.id}<----->{self.vidas} vidas")
-        print(self.tablero_j)
+    def disparo_coordenada(self, id_jugador, coordenada):
+        self.coordenada = coordenada
+        #comprobar_barco_existe()
+        #poner_marca()
         
-    def imprimir_tableros(self, maquina):
-        self.maquina = maquina
-        print(f"->Tablero {self.id}<->{self.vidas} vidas<--------->Tablero {self.maquina.id}<->{self.maquina.vidas} vidas")
-        visualizar_tableros(self.tablero_j, self.maquina.tablero_j)
-

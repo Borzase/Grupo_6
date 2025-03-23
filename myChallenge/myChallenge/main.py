@@ -1,33 +1,18 @@
 
 
 from clases import Jugador
-from variables import *
 
 
 #Después de eso ya comienza el juego. 
 #Básicamente se irá ejecutando iterativamente en el while,
 # y le irá preguntando coordenadas al usuario.
 
-##Mensaje de bienvenida
+##MEnsaje de bienvenida
 print("Bienvenido a Hundir la flota grumete")
 
-#Print Menu
-def switch(opcion):
-    diccionario = {
-        1 : "instrucciones()",
-        #2 : "id_jugador()",
-        3 : "jugar()",
-        4 : "salir()"
-    }
-    if opcion > 4:
-        return print("Ingrese un numero 1 al 4")
-    return eval (diccionario.get(opcion))
 
-
-
-def instrucciones():
+def intrucciones():
     print("""Intrucciones de Juego:
-          =========================================
           - Hay dos jugadores, usted y la máquina
           - Sobre un tablero debe colocar la posicion de sus barcos
           - Cuenta con: 4 barcos de 1 posición de eslora
@@ -40,68 +25,58 @@ def instrucciones():
           - Si en las coordenas hay barco, le resta una vida a su oponente y sigue disparando
           - Si en las coordenas hay agua, no resta vidas y pierde su turno
           - Gana quien hunde todos los barcos del contrario
-          - Pierde el que se ha quedado sin vidas
-          ==========================================
-          """)
+          - Pierde el que se ha quedado sin vidas""")
     return
     
 
 def id_jugador():
-    nombre = input("Introduzca su nombre:")
-    print(f"--->{nombre}, estamos creando tu tablero!<---")
-    #Jugador(nombre)
-    return nombre
+    nombre = input("Introduzca su nombre")
+    print(f"{nombre}, ¿Estás listo para jugar?")
+    Jugador(nombre)
+    return Jugador(nombre)
 
+    
 
 def jugar():
-    id = id_jugador()
-    jugador = Jugador(id)
-    
-    # imprmir los tableros del jugador
+    jugador1 = Jugador(id_jugador())
+    vidas_jugador1 = 10         #quizas haya que hacer alguna funcion para esto
+    vidas_maquina = 10
+    jugador1.barco4_1()
+    jugador1.barco3_2()
+    jugador1.barco2_3()
+    jugador1.barco1_4()
+       
+    Jugador.dim_tablero   # imprmir los tableros del jugador
     # Ejecutar posicionamiento barcos_maquina de manera aleatorio
-    jugador.posicionar_barcos()
-    jugador.imprimir_tablero()
-    
-    
-    maquina = Jugador("maquina")
-    maquina.posicionar_barcos()
-    maquina.imprimir_tablero()
-    
-    
-
-    
-    #imprimir barcos_maquina para chequear que ha funcionadp
+        #imprimir barcos_maquina para chequear que ha funcionadp
     #Empezar a jugar con un bucle while donde:
     #mientras las vidas del jugador o de la maquina no lleguen a "0" seguimos jugando
-    #cuando while = 0 del jugador o de la maquina se rompe el bucle y salimos del juego
-    while (jugador.vidas >7 and maquina.vidas > 7):
+                    #cuando while = 0 del jugador o de la maquina se rompe el bucle y salimos del juego
         # llamar a función disparar jugador
-        jugador.disparo(maquina.tablero_j)
-        jugador.reduccion_vidas()
-        
-        
+            #........
         # llamar a funcion disparar de la maquina
-        maquina.disparo_maquina(jugador.tablero_j)
-        maquina.reduccion_vidas()
-        #jugador.imprimir_tablero()
-        #maquina.imprimir_tablero()
-        jugador.imprimir_tableros(maquina)
-        
-        # cada "x" disparos ofrecer posibilidad de visualizar
-        #marcador o de salir del juego
-        ####
-        ####
+            #.........
+        # cada "x" disparos ofrecer posibilidad de visualizar marcador o de salir del juego
+    
     
 
 def salir():
-    print("Hasta pronto!")
-    exit()
-    
+    pass 
 
+def switch(opcion):
+    diccionario = {
+        1 : "instrucciones()",
+        2 : "id_jugador()",
+        3 : "jugar()",
+        4 : "salir()"
+    }
+    if opcion > 4:
+        return
+    return eval (diccionario.get(opcion))
 while(True):
     print("""Seleccione una opción:
     1 - Instrucciones de juego
-    (no use) 2 - Introduzca su nombre de jugador
+    2 - Introduzca su nombre de jugador
     3 - Comenzar a jugar
     4 - Salir del juego""")
 
@@ -110,3 +85,5 @@ while(True):
     if opcion > 4:
         print("Algo ha ido mal, intentalo de nuevo")
     
+
+
