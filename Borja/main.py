@@ -15,7 +15,7 @@ print("Bienvenido a Hundir la flota grumete")
 def switch(opcion):
     diccionario = {
         1 : "instrucciones()",
-        #2 : "id_jugador()",
+        2 : "id_jugador()",
         3 : "jugar()",
         4 : "salir()"
     }
@@ -50,7 +50,7 @@ def id_jugador():
     nombre = input("Introduzca su nombre:")
     print(f"--->{nombre}, estamos creando tu tablero!<---")
     jugador = Jugador(nombre)
-    return jugador
+    return True
 
 
 def jugar():
@@ -99,11 +99,16 @@ def jugar():
             break
         elif pregunta == 3:
             break
+    
 
+    if jugador.vidas == 0:
+        print(f"Has perdido {jugadaor.id}")
 
+    if maquina.vidas == 0:
+        print(f"Enhorabuena, {jugador.id} le has ganado a la máquina")
 
         
-        
+    return   
         #jugador.imprimir_tablero()
         #maquina.imprimir_tablero()
         
@@ -122,7 +127,7 @@ def salir():
 while(True):
     print("""Seleccione una opción:
     1 - Instrucciones de juego
-    (no use) 2 - Introduzca su nombre de jugador
+    2 - Introduzca su nombre de jugador
     3 - Comenzar a jugar
     4 - Salir del juego""")
 

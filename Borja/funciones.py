@@ -58,13 +58,13 @@ def disparo_coordenada(tablero_j, tablero_v):        #disparo del jugador a la m
         tablero_j[coordenada] == "X"
         tablero_v[coordenada] = "X"
         print("Buena punteria\n", tablero_v)
-        contador_maq = maquina.reduccion_vidas()
+        maquina.reduccion_vidas()
         print("Tiene otro disparo")
         return jugador.disparo(maquina)
     elif tablero_j[coordenada] != "O":
         tablero_v[coordenada]  = "-"
         print("Has fallado")
-        print(tablero_v, player.tablero_j)
+        print(tablero_v, jugador.tablero_j)
         
     return 
 
@@ -77,7 +77,7 @@ def disparo_maq(tablero_j, tablero_v):           # disparo de la maquina al juga
         tablero_j[coordenada] == "X"
         tablero_v[coordenada] = "X"
         print("Mala suerte! Te han dado")
-        contador_jugador = jugador.reduccion_vidas()
+        jugador.reduccion_vidas()
         return maquina.disparo_maquina(jugador)
     elif tablero_j[coordenada] != "O":
         tablero_v[coordenada]  = "-"        
