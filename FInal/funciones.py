@@ -1,21 +1,36 @@
-
 import numpy as np
 
 # Función para posicionar un solo barco aleatoriamente
 def pos_barco_aleatorio(tablero, esl, ori):
-    pos_barco = np.array([0, 0])
-    pos = pos_barco + np.array([esl, esl])
-    while pos[0] > len(tablero) or pos[1] + esl > len(tablero) or tablero[pos_barco[0]][pos_barco[1]] == "O":
-        pos_barco = np.random.randint(0, len(tablero), 2)
+    colocado = False
 
-    for fil, vec in enumerate(tablero):
-        for col, val in enumerate(vec):
-            if val != "O" and fil == pos_barco[0] and col == pos_barco[1]:
-                if ori == "H":
-                    tablero[fil, col:col + esl] = "O"
-                else:
-                    tablero[fil:fil + esl, col] = "O"
-                return tablero
+    while not colocado:
+        # Generar coordenada inicial aleatoria
+        fila, col = np.random.randint(0, len(tablero)), np.random.randint(0, len(tablero))
+        
+        # Verificar si el barco cabe en el tablero
+        if ori == "H":
+            if col + esl > len(tablero):
+                continue  # No cabe horizontalmente, volver a intentar
+
+            # Verificar que las casillas estén vacías
+            if np.any(tablero[fila, col:col + esl] == "O"):
+                continue  # Hay solapamiento, volver a intentar
+
+            # Colocar el barco
+            tablero[fila, col:col + esl] = "O"
+            colocado = True
+
+        else:  # Vertical
+            if fila + esl > len(tablero):
+                continue  # No cabe verticalmente, volver a intentar
+
+            if np.any(tablero[fila:fila + esl, col] == "O"):
+                continue  # Hay solapamiento, volver a intentar
+
+            tablero[fila:fila + esl, col] = "O"
+            colocado = True
+
     return tablero
 
 # Función que coloca todos los barcos según el diccionario de esloras
