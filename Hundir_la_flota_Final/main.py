@@ -1,4 +1,3 @@
-
 from clases import Jugador
 from variables import *
 
@@ -36,8 +35,14 @@ def id_jugador():
     return True
 
 def jugar():
-    # Esta función ahora maneja todo el ciclo del juego de forma clara
     global jugador
+
+    # COMENTARIO: Si el jugador intenta jugar sin haber introducido su nombre,
+    # antes se producía un error porque la variable "jugador" no existía. Ahora lo comprobamos antes.
+    if "jugador" not in globals():
+        print("Primero debes introducir tu nombre (opción 2)")
+        return
+
     print(f"Empecemos a jugar, {jugador.id}")
     
     jugador.posicionar_barcos()
@@ -46,26 +51,33 @@ def jugar():
 
     jugador.imprimir_tableros(maquina)
 
-    # Bucle del juego. Jugador y máquina se disparan hasta que uno pierda todas las vidas.
+    # COMENTARIO: Antes se hacían 4 disparos por turno sin comprobar si alguien ya había perdido.
+    # Ahora disparamos hasta que alguien pierda todas las vidas, verificando tras cada disparo.
     while jugador.vidas > 0 and maquina.vidas > 0:
-        for x in range(4):
-            jugador.imprimir_tablero()
-            jugador.disparo(maquina)
-                
-            maquina.disparo_maquina(jugador)
-        
-            jugador.contador_vidas()
-            maquina.contador_vidas()
-        
+        jugador.imprimir_tablero()
+        jugador.disparo(maquina)
+
+        if maquina.vidas <= 0:
+            break
+
+        maquina.disparo_maquina(jugador)
+
+        jugador.contador_vidas()
+        maquina.contador_vidas()
+
+        if jugador.vidas <= 0:
+            break
+
         pregunta = int(input("""Indique el número con su decision:
                          1: Seguir jugando
                          2: Visualizar marcador
                          3: Salir del juego"""))
         if pregunta == 1:
-            return ("sigamos jugando")
+            continue
         elif pregunta == 2:
+            # COMENTARIO: Antes ver el marcador salía del juego. Ahora simplemente continúa.
             jugador.marcador(maquina)
-            break
+            continue
         elif pregunta == 3:
             break
 
