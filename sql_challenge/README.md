@@ -7,4 +7,4 @@ Pero en este caso, el objetivo será **encontrar la información de un proveedor
 
 📋 Para la devolución les solicitan que rellenen unos datos correspondientes al producto comprado pero solo tienen el **nombre del producto** y su **precio**.
 
-### <center> ¡Ven y ayuda a Juan y María a resolver este problema!</center>
+### <center> ¡Ven y ayuda a Juan y María a resolver este problema! </center>
