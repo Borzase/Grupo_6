@@ -30,7 +30,7 @@ datos_proveedores = {
     25: ("Morteros del Sur", "Calle Bolígrafo 8", "Almería", "Almería"),
     26: ("Andamios López", "Calle Almacén 50", "Ciudad Real", "Ciudad Real"),
     27: ("Impermeabilizantes Mediterráneo", "Av. Costa 101", "Castellón", "Castellón"),
-    28: ("Iluminación Técnica", "Calle Luz 36", "León", "León"),
+    28: ("La Pincelada Divertida", "Calle Luz 36", "León", "León"),
     29: ("Tornillería Antártida", "Paseo Frío 4", "Lugo", "Lugo"),
     30: ("Maquinaria para Obra", "Av. Aroma 7", "Ourense", "Ourense")
 }
