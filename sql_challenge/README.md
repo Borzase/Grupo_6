@@ -1,6 +1,6 @@
 ## <center>¡Busca al Proveedor!</center>
 
-Para la práctica grupal, hemos creado nuestra propia versión del clásico *"Busca al asesino"*.  
+Para la práctica grupal (Parte II), hemos creado nuestra propia versión del clásico *"Busca al asesino"*.  
 Pero en este caso, el objetivo será **encontrar la información de un proveedor de un bote de pintura**.
 
 👫 *María* y *Juan* quieren pintar la habitación de invitados. Han comprado un **bote de pintura** por internet pero no les convence el *color*.
