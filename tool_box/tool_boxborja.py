@@ -80,7 +80,13 @@ def get_features_num_regression(dataframe, target_col,umbral_corr, pvalue = None
     y en caso de introducir el pvalue, de las varibales cuyo p-valor está por debajo del pvalue indicado.
     Se ofrece además de manera visual una matriz de correlación entre la columna target y las variables seleccionadas
     """
-    try: 
+    try:
+        if not isinstance(dataframe, pd.DataFrame):
+            print("Error: 'df' no es un DataFrame.")
+            return None 
+        if not (0 < pvalue < 1):
+            print("Error: 'pvalue' debe estar entre 0 y 1.")
+            return None
         if dataframe[target_col].nunique()/len(dataframe) * 100 >= 20:  # Condición de que la columna target sea numerica continua
             lista_columnas = []
             tabla = dataframe.drop(target_col, axis=1)
@@ -126,6 +132,9 @@ def plot_features_num_regression(dataframe, target_col, lista = [], umbral_corr 
     La función devuelve un pairplot con las columnas que han superado los umbrales de correlación
     y, en caso de incluir el pvalue, cuyo p-valor sea inferior al pvalue."""
     try:
+        if not isinstance(dataframe, pd.DataFrame):
+            print("Error: 'df' no es un DataFrame.")
+            return None 
         if dataframe[target_col].nunique()/len(dataframe) * 100 >= 20:
             lista_columnas = []
             if len(lista) == 0:
