@@ -152,17 +152,22 @@ def plot_features_num_regression(dataframe, target_col, lista = [], umbral_corr 
                 return sns.pairplot(dataframe[lista_columnas])
 
             else:
-                lista
-                for col in lista:
-                    corrs = pearsonr(dataframe[target_col], dataframe[col])
-                    if pvalue != None:
-                        if np.abs(corrs[0]) < umbral_corr or corrs[1] > pvalue:
-                            lista.remove(col)
-                    else:
-                        if np.abs(corrs[0]) < umbral_corr:
-                            lista_columnas.remove(col)
-                lista.insert(0, target_col)
-                return sns.pairplot(dataframe[lista])
+                try:
+                    lista
+                    for col in lista:
+                    
+                        corrs = pearsonr(dataframe[target_col], dataframe[col])
+                        if pvalue != None:
+                            if np.abs(corrs[0]) < umbral_corr or corrs[1] > pvalue:
+                                lista.remove(col)
+                        else:
+                            if np.abs(corrs[0]) < umbral_corr:
+                                lista_columnas.remove(col)
+                    
+                    lista.insert(0, target_col)
+                    return sns.pairplot(dataframe[lista])
+                except Exception:
+                    print(f"La columna '{col}' no es numérica")
                 
         else: 
             return print(f"La variable {target_col} no cumple con el umbral de variable numérica continua")
