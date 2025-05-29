@@ -260,16 +260,29 @@ def plot_features_cat_regression(df,target_col= "", columns = [], pvalue = 0.05,
     selected_features = []
 
     if len(columns) == 0: 
-        columns = [col for col in df.select_dtypes(include=np.number).columns if col != target_col]
-        for col in columns:
-            subset = df[[target_col, col]].replace([np.inf, -np.inf], np.nan).dropna() #Necesitamos esto para quitar infinitos y nulos, para evitar fallo en el coeficiente de Pearson
-            corr, p= pearsonr(subset[target_col], subset[col])
-            if p < pvalue: #correlación estadísticamente significativa
-                selected_features.append(col)
-                sns.scatterplot(data=df, x=target_col, y= col)
-                plt.title(f'Relación entre {target_col} y {col}')
-                plt.tight_layout()
-                plt.show()
+        columnas_categoricas = df.select_dtypes(include= ['object','category','bool']).columns.to_list()
+        selected_features = []
+        for col in columnas_categoricas: 
+            if df[col].nunique() ==2:
+                categorias = df[col].dropna().unique() #Obtenemos las categorías de la columna (binomial)
+                grupo1 = df[df[col] == categorias[0]][target_col].dropna() #Primera categoría
+                grupo2 = df[df[col] == categorias[1]][target_col].dropna() #Segunda categoría
+                if len(grupo1) > 1 and len(grupo2) >1: #Necesitamos que tenga mas de un elemento para poder hacer el test.
+                    stats, p = mannwhitneyu(grupo1, grupo2)
+                if p < pvalue:
+                    selected_features.append(col)
+            elif df[col].nunique() > 2:
+                grupos = df[col].dropna().unique()
+                valor_grupo= [df[df[col] == grupo][target_col].dropna() for grupo in grupos]
+                if all(len(elementos) > 2 for elementos in valor_grupo) and len(valor_grupo) >= 2:
+                    stats, p = f_oneway(*valor_grupo)#H0 implica que tienen medias similares y no influye sobre la variable target (son independientes)
+                    if p < pvalue: #Se rechaza H0 y los grupos tienen una elevada varianza. Cada grupo categórico tiene influencia en la variable target (son dependientes)
+                        selected_features.append(col)
+                        sns.histplot(data = df, x= target_col, hue = col)
+                        plt.title(f'Histograma entre {target_col} y {col}')
+                        plt.tight_layout()
+                        plt.show()
+    
 
     if len(columns) > 0:
         columnas_categoricas = [col for col in columns if df[col].dtype in ['object', 'category', 'bool']]
