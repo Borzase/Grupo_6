@@ -172,7 +172,15 @@ def plot_features_num_regression(dataframe, target_col, lista = [], umbral_corr 
 
 def get_features_cat_regression(df, target_col, pvalue=0.05):
     '''La funcion tiene como objetivo estudiar la correlación entre la variable objetivo con el resto de columnas y estudiar su independencia.
+       
+       Argumentos:
+       df (pandas dataframe) = corresponden a los datos a los que se les quiere hacer el estudio.
+       target_col ('string') = nombre de la columna objetivo
+       pvalue ('float') = pvalor de referencia para aceptar o rechazar la hipotesis
 
+       Retorna:
+       
+       La funcion devuelve una lista con las variables cuyo p valor es menor al pvalue de referencia y por tanto rechaza la hopotesis nula.
     '''
     
     if not isinstance(df, pd.DataFrame):
@@ -217,6 +225,18 @@ def get_features_cat_regression(df, target_col, pvalue=0.05):
 
 
 def plot_features_cat_regression(df,target_col= "", columns = [], pvalue = 0.05, with_individual_plot = False):
+    '''La función tiene como objetivo pintar los histogramas de las variables categóricas que tengan unos pvalores menores al de referencia.
+
+       Argumentos:
+       df (pandas dataframe) = corresponden a los datos a los que se les quiere hacer el estudio.
+       target_col ('string') = nombre de la columna objetivo
+       pvalue ('float') = pvalor de referencia para aceptar o rechazar la hipotesis
+       with_individual_plot (None) = argumento por defecto None
+
+       Retorna:
+
+       La funcion retorna los histogramas de las variables categóricas que cumplan los test con la variable objetivo (target) 
+    '''
     if not isinstance(df, pd.DataFrame):
         raise ValueError("Por favor, introduce un argumento que sea un DataFrame")
     if not isinstance(target_col,str) or target_col not in df.columns:
