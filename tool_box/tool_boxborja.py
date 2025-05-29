@@ -2,7 +2,7 @@
 
 import pandas as pd
 import numpy as np
-import scipy.stats as pearsonr
+from scipy.stats import pearsonr
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -85,7 +85,7 @@ def get_features_num_regression(dataframe, target_col,umbral_corr, pvalue = None
             lista_columnas = []
             tabla = dataframe.drop(target_col, axis=1)
             for col in tabla.columns:
-                if dataframe[col].dtype != 'object' or dataframe[col].dtype != 'bool':
+                if dataframe[col].dtype != 'object' and dataframe[col].dtype != 'bool':
                     corrs = pearsonr(dataframe[target_col], dataframe[col])
                     if pvalue != None:
                         if np.abs(corrs[0]) > umbral_corr and corrs[1] <= pvalue:
@@ -131,7 +131,7 @@ def plot_features_num_regression(dataframe, target_col, lista = [], umbral_corr 
             if len(lista) == 0:
                 tabla = dataframe.drop(target_col, axis=1)
                 for col in tabla.columns:
-                    if dataframe[col].dtype != 'object' or dataframe[col].dtype != "bool":
+                    if dataframe[col].dtype != 'object' and dataframe[col].dtype != 'bool':
                         corrs = pearsonr(dataframe[target_col], dataframe[col])
                         if pvalue != None:
                             if np.abs(corrs[0]) > umbral_corr and corrs[1] <= pvalue:
