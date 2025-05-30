@@ -84,9 +84,6 @@ def get_features_num_regression(dataframe, target_col,umbral_corr, pvalue = None
         if not isinstance(dataframe, pd.DataFrame):
             print("Error: 'df' no es un DataFrame.")
             return None 
-        if not (0 < pvalue < 1):
-            print("Error: 'pvalue' debe estar entre 0 y 1.")
-            return None
         if dataframe[target_col].nunique()/len(dataframe) * 100 >= 20:  # Condición de que la columna target sea numerica continua
             lista_columnas = []
             tabla = dataframe.drop(target_col, axis=1)
